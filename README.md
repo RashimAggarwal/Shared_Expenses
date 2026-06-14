@@ -1,82 +1,182 @@
 # Shared Expenses App
 
-This is my placement assignment submission for the Spreetail Software Developer role. I built it as a full-stack shared expenses app for Aisha, Rohan, Priya, Meera, Sam, and Dev using React.js, Node.js, Express, and SQLite.
+This repository contains my submission for the Spreetail Software Developer assignment. The application is a full-stack shared expenses platform designed to manage group expenses, settlements, changing group memberships, and the import of imperfect real-world expense data.
+
+## Overview
+
+The application was built to address the requirements described in the assignment scenario involving Aisha, Rohan, Priya, Meera, Sam, and Dev. The focus of the project is not only expense tracking but also transparent handling of data anomalies during CSV import.
 
 ## Features
 
-- Login module with JWT authentication
-- Create and manage groups
-- Track members with join and leave dates
-- Import the provided `expenses_export.csv` without editing it first
-- Detect and report messy data problems during import
-- Support equal, unequal, percentage, and share-based splits
-- Convert USD expenses to INR using a documented fixed rate
-- Record settlements/payments separately from expenses
-- Show group balances, individual trace, and simplified "who pays whom" settlements
+### Authentication
 
-## Tech Stack
+* Secure login using JWT-based authentication
+* Password hashing with bcrypt
 
-- Frontend: React.js with Vite
-- Backend: Node.js and Express
-- Database: SQLite relational database using `better-sqlite3`
-- Authentication: JWT and bcrypt
-- CSV parsing: `csv-parse`
+### Group Management
+
+* Create and manage expense groups
+* Add, remove, and manage members
+* Track membership periods using join and leave dates
+
+### Expense Management
+
+* Create, edit, and delete expenses
+* Support multiple split methods:
+
+  * Equal splits
+  * Exact amount splits
+  * Percentage-based splits
+  * Share-based splits
+* Record settlements and repayments separately from expenses
+
+### Balance Calculation
+
+* Group-level balance summaries
+* Individual balance breakdowns
+* Transparent expense tracing for auditability
+* Simplified settlement recommendations showing who should pay whom
+
+### CSV Import
+
+* Import the provided `expenses_export.csv` without manual modification
+* Detect and report data anomalies
+* Generate an import report describing every anomaly and action taken
+* Preserve traceability of imported records
+
+### Currency Handling
+
+* Support expenses recorded in multiple currencies
+* Convert USD expenses to INR using a documented fixed conversion rate to ensure reproducible calculations
+
+## Technology Stack
+
+### Frontend
+
+* React.js
+* Vite
+
+### Backend
+
+* Node.js
+* Express.js
+
+### Database
+
+* SQLite (relational database)
+* better-sqlite3
+
+### Authentication
+
+* JWT
+* bcrypt
+
+### Data Processing
+
+* csv-parse
 
 ## Local Setup
 
-1. Install Node.js 20 or newer.
-2. Install dependencies:
+### Prerequisites
+
+* Node.js 20 or later
+* npm
+
+### Installation
 
 ```bash
 npm run install:all
 ```
 
-3. Start the app:
+### Start Development Environment
 
 ```bash
 npm run dev
 ```
 
-4. Open the frontend:
+### Access the Application
+
+Frontend:
 
 ```text
 http://localhost:5173
 ```
 
-5. Login with:
+### Demo Credentials
 
 ```text
 Email: student@example.com
 Password: password123
 ```
 
-6. Create a group and upload `expenses_export.csv` from the project root.
+### Importing Data
+
+After logging in:
+
+1. Create or select a group.
+2. Upload the provided `expenses_export.csv`.
+3. Review the generated import report.
+4. Inspect detected anomalies and actions taken.
 
 ## Deployment
 
-Recommended deployment:
+Suggested deployment configuration:
 
-- Backend: Render, Railway, or Fly.io
-- Frontend: Vercel or Netlify
-- Database: SQLite is acceptable for this assignment demo. For production, I would move to PostgreSQL while keeping the same relational schema.
+### Frontend
 
-Set these environment variables during deployment:
+* Vercel
+* Netlify
+
+### Backend
+
+* Render
+* Railway
+* Fly.io
+
+### Database
+
+SQLite is used for this assignment submission. For a production-scale deployment, PostgreSQL would be the preferred relational database while preserving the same data model and business rules.
+
+### Environment Variables
 
 ```text
 JWT_SECRET=<strong-secret>
-VITE_API_URL=<deployed-backend-url>/api
+VITE_API_URL=<backend-url>/api
 ```
 
-## AI Used
+## AI Usage
 
-I used an AI coding assistant as a development collaborator for scaffolding, debugging, and reviewing edge cases. I remained responsible for the product decisions, data policies, schema, and final code.
+AI tools were used for planning, implementation assistance, debugging, and code review. All business rules, anomaly-handling policies, database design decisions, and final implementation choices were reviewed and validated manually.
 
-## Important Files
+Additional details are documented in `AI_USAGE.md`.
 
-- `backend/src/importer.js`: CSV import and anomaly handling
-- `backend/src/balances.js`: balance and settlement calculation
-- `backend/src/db.js`: relational schema
-- `frontend/src/App.jsx`: main user interface
-- `SCOPE.md`: anomaly log and database schema
-- `DECISIONS.md`: product and engineering decisions
-- `AI_USAGE.md`: AI usage notes
+## Project Documentation
+
+### README.md
+
+Project overview and setup instructions.
+
+### SCOPE.md
+
+* Database schema
+* Import policies
+* Complete anomaly log
+
+### DECISIONS.md
+
+* Product decisions
+* Engineering trade-offs
+* Design rationale
+
+### AI_USAGE.md
+
+* AI tools used
+* Key prompts
+* Corrections made to AI-generated suggestions
+
+## Key Source Files
+
+* `backend/src/importer.js` — CSV import pipeline and anomaly handling
+* `backend/src/balances.js` — Balance and settlement calculations
+* `backend/src/db.js` — Relational database schema
+* `frontend/src/App.jsx` — Main application interface
